@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="shortcut icon" href="./media/favicon.ico" type="image/x-icon">
+    <script src="main.js" defer></script>
+    <script src="prism.js" defer></script>
+    <link rel="stylesheet" href="prism.css">
+    <title>Object Detection</title>
+</head>
+
+<body>
+
+    <header> Object Detection using Python </header>
+
+    
+    <div id="video" class="container embed-responsive embed-responsive-4by3">
+        <h1 class="title">Original Video</h1>
+        <video width="400" height="267" controls>
+            <source src="./media/video.mp4">
+        </video>
+    </div>
+
+    <hr class="container">
+
+    <div id="code" class="container">
+        <li>Importing required libraries
+            <pre class="language-py">
+<code>pip install tensorflow==2.4.0</code>
+<code>pip install keras==2.4.3 numpy==1.19.3 pillow==7.0.0 scipy==1.4.1 h5py==2.10.0 matplotlib==3.3.2 opencv-python keras-resnet==0.2.0</code>
+<code>pip install imageai --upgrade</code></pre>
+        </li>
+        <li>Initiation
+            <pre class="language-py">
+<code>from imageai.Detection import VideoObjectDetection
+import os
+execution_path = os.getcwd()
+ 
+detector = VideoObjectDetection()
+detector.setModelTypeAsYOLOv3()
+detector.setModelPath( os.path.join(execution_path , "yolo.h5"))
+detector.loadModel()
+
+video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join(execution_path, "video.mp4"),
+                                            output_file_path=os.path.join(execution_path, "cat_detected"),
+                                            frames_per_second=20, log_progress=True)
+print(video_path)
+
+# video.mp4 is original video
+# cat_detected is the generated video (converted from .avi to .mp4 for compressing the size)
+</code>
+            </pre>
+        </li>
+    </div>
+
+    <br>
+    <hr class="container">
+
+    <div id="video" class="container embed-responsive embed-responsive-16by9">
+        <h1 id="title">Generated Video</h1>
+        <video width="400" height="267" controls>
+            <source src="./media/cat_detected.mp4">
+        </video>
+    </div>
+
+    <div id="note" class="container img-fluid">
+       <p> The generated video is a bit longer than the original one due to additional generation of frames while computation. Both videos end at same frame.<p>
+       <p> <a href="https://colab.research.google.com/drive/1npOZ4gC5t6X5AhIitdxYmEMhhVO67WXI?usp=sharing" target="_blank">Code (Google Colab)</a> taken from <a href="https://predictivehacks.com/object-detection-with-yolo/">Here</a> </p> 
+       <p> <a href="https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5" target="_blank"> yolo.h5 download link </a></p> 
+    </div>
+    
+</body>
+</html>
